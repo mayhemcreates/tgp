@@ -1,0 +1,799 @@
+@use "./plyr.scss";
+
+@font-face {
+  font-family: "GillSansLight";
+  src: url("../assets/fonts/GillSans-Light.ttf") format("woff");
+}
+
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700");
+
+$breakpoint-xs: 0;
+$breakpoint-smaller: 420px; /* Custom breakpoint - not Bootstrap */
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-xxl: 1290px;
+$breakpoint-xxxl: 1450px;
+
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+);
+
+// Media queries
+
+@mixin mq($from: null, $until: null) {
+  $media-query: "";
+
+  @if $from and $until {
+    $media-query: "(min-width: #{$from}) and (max-width: #{$until - 1})";
+  } @else if $from {
+    $media-query: "(min-width: #{$from})";
+  } @else if $until {
+    $media-query: "(max-width: #{$until - 1})";
+  }
+
+  @if $media-query != "" {
+    @media #{$media-query} {
+      @content;
+    }
+  }
+}
+
+@mixin media-query($breakpoint) {
+  @media (min-width: map-get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}
+
+// Variables
+$primary-color: #2e2e2b;
+$text-color: #fff;
+$teal: #177071;
+$teal-1: #1a9393;
+$teal-2: #00747a;
+$teal-3: #46aa92;
+$teal-4: #127172;
+$white: #ededed;
+$max-width: 1200px;
+$border-radius: 25px;
+$spacing-md: 20px;
+$spacing-lg: 40px;
+$grid-columns: 12;
+$grid-gutter: 20px;
+$font-gillsans: "GillSansLight", "Roboto", "Helvetica Neue", Arial, sans-serif;
+$font-roboto: "Roboto", sans-serif;
+$teal-background-gradient: linear-gradient(to bottom, $teal 4%, $teal-2);
+
+// Mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin transition($property: all, $duration: 0.3s) {
+  transition: $property $duration ease;
+}
+
+:root {
+  --swiper-pagination-color: #ededed;
+  --swiper-pagination-bullet-size: 10px;
+}
+// Base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-roboto;
+  line-height: 1.6;
+  color: $primary-color;
+  background: $white;
+  min-height: 100vh;
+  position: relative;
+  text-wrap: pretty;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+
+  @include mq($until: $breakpoint-md) {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  &--py {
+    padding: 70px 0;
+
+    @include mq($until: $breakpoint-md) {
+      padding: 40px 20px;
+    }
+  }
+}
+
+.relative {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.absolute {
+  position: absolute;
+}
+.section {
+  &--bg-teal {
+    background-color: $teal;
+  }
+
+  &--bg-socks {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 3;
+    &:before {
+      content: "";
+      background:
+        linear-gradient(#1a9393, #00747a),
+        url("../assets/socks.svg") repeat right;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-blend-mode: overlay;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  }
+
+  &--bg-dark-socks {
+    width: 100%;
+    height: 100%;
+    position: relative;
+
+    &:before {
+      content: "";
+      background:
+        linear-gradient(#0000001a, #0000001a),
+        url("../assets/socks-dark.svg") repeat right;
+      opacity: 0.2;
+      display: block;
+      width: 100%;
+      height: 100%;
+      background-size: clamp(800px, 60%, 1000px);
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  }
+
+  &--p-lg {
+    padding: 90px 120px 90px 0;
+
+    @include mq($until: $breakpoint-md) {
+      padding: 40px 20px;
+    }
+  }
+
+  &--py-lg {
+    padding: 90px 0;
+    @include mq($until: $breakpoint-md) {
+      padding: 40px 20px;
+    }
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+
+    @include mq($until: $breakpoint-md) {
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.full-width {
+  grid-column: 1 / 13;
+  height: 80vh;
+  overflow: hidden;
+  position: relative;
+
+  @include mq($until: $breakpoint-md) {
+    width: 100%;
+  }
+}
+
+.full {
+  grid-column: 4 / 10; /* columns 3-10 = 8 columns */
+  width: 100%;
+}
+
+.half-left {
+  grid-column: 4 / 7; /* 3 columns */
+}
+.half-right {
+  grid-column: 7 / 10; /* 3 columns, gap at 6-7 */
+}
+
+.content-left {
+  grid-column: 4 / 7; /* 4 columns */
+}
+.content-right {
+  grid-column: 7 / 13; /* 6 columns, no right padding */
+  height: 100%;
+  overflow: hidden;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.header {
+  background-color: black;
+  width: 100%;
+  height: 130px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  border-radius: $border-radius;
+  z-index: 1000;
+  position: fixed;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+
+  @include mq($until: $breakpoint-md) {
+    padding: 0 20px;
+  }
+
+  &__logo {
+    height: 60px;
+  }
+
+  &__nav {
+    display: flex;
+    gap: 30px;
+    height: 100%;
+    align-items: center;
+
+    @include mq($until: $breakpoint-md) {
+      gap: 0;
+    }
+  }
+}
+
+.nav {
+  &__list {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 40px;
+    list-style-type: none;
+
+    @include mq($until: $breakpoint-md) {
+      display: none;
+    }
+
+    a {
+      text-decoration: none;
+      color: $white;
+    }
+  }
+
+  &__item {
+    color: #fff;
+    font-size: 15px;
+    line-height: 1.8;
+    display: block;
+    padding: 0.75rem 0;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid #127172;
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    &--flex {
+      display: block;
+      position: relative;
+    }
+  }
+
+  &__hamburger {
+    width: 25px;
+    height: 25px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 1000;
+  }
+
+  &__toggle {
+    width: 15px;
+    height: 15px;
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    right: 0;
+    top: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.subnav {
+  display: none;
+  flex-direction: column;
+
+  &--open {
+    display: flex;
+    color: $white;
+    height: 100%;
+  }
+
+  &__item {
+    padding: 10px 0 10px 20px;
+    color: $teal-3;
+    width: 100%;
+    box-sizing: border-box;
+
+    &:first-of-type {
+      border-top: 1px solid $teal;
+      margin-top: 0.75rem;
+    }
+    &:last-of-type {
+      padding: 10px 0 0 20px;
+    }
+  }
+}
+
+.line {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+  position: relative;
+  transform-origin: center;
+
+  &:nth-child(1) {
+    transform-origin: center;
+    transform: translateY(-7px);
+  }
+
+  &:nth-child(2) {
+    transform-origin: center;
+  }
+
+  &:nth-child(3) {
+    transform-origin: center;
+    transform: translateY(7px);
+  }
+}
+
+.nav__hamburger {
+  &--open {
+    .line {
+      &:nth-child(1) {
+        transform: translateY(4.5px) rotate(45deg); // Move down to center, then rotate
+      }
+
+      &:nth-child(2) {
+        opacity: 0;
+      }
+
+      &:nth-child(3) {
+        transform: translateY(0.5px) rotate(-45deg); // Move up to center, then rotate
+      }
+    }
+  }
+}
+
+.hamburger {
+  &__nav {
+    display: block; // Change from none to block
+    overflow: hidden; // Add this for smooth height animation
+    width: 0;
+    position: absolute;
+
+    ul,
+    li {
+      list-style-type: none;
+    }
+
+    &--open {
+      width: 400px;
+      display: flex;
+      padding: 4rem;
+      flex-direction: column;
+      right: 0;
+      top: 80%;
+      background-color: #000;
+      color: $white;
+      box-sizing: border-box;
+      border-bottom-right-radius: 15px;
+      border-bottom-left-radius: 15px;
+
+      @include mq($until: $breakpoint-md) {
+        top: -20px;
+        right: 0;
+        left: -20px;
+        width: 100vw !important;
+        height: 100vh;
+        border-radius: 0;
+      }
+    }
+  }
+}
+
+.language {
+  color: $white;
+  position: relative;
+  height: 100%;
+
+  &:hover {
+    background-color: $teal;
+    .language__dropdown {
+      display: block;
+      position: absolute;
+      width: 100%;
+      top: 100%;
+      right: 0;
+      list-style: none;
+      background: $teal;
+      box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  &__toggle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    color: $white;
+    height: 100%;
+    padding: 0 0.5rem;
+  }
+
+  &__dropdown {
+    display: none;
+    list-style-type: none;
+
+    &--open {
+      display: block;
+      position: absolute;
+      width: 100%;
+      top: 100%;
+      right: 0;
+      list-style: none;
+      background: $teal;
+      box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  &__icon {
+    height: 25px;
+    width: 25px;
+  }
+
+  &__current {
+    font-size: 0.85rem;
+  }
+
+  &__option {
+    display: block;
+    color: $white;
+    width: 100%;
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.5rem 0;
+    box-sizing: border-box;
+    background-color: $teal-1;
+
+    &:hover {
+      background-color: $teal-4;
+    }
+  }
+}
+
+.image {
+  &--sm {
+    width: 100%;
+  }
+
+  &--rounded {
+    border-radius: 25px;
+
+    &-sm {
+      border-radius: 15px;
+    }
+  }
+
+  &--full-width {
+    position: absolute;
+    object-fit: cover;
+    object-position: 60% 40%;
+    width: 100%;
+    height: 100%;
+
+    @include mq($until: $breakpoint-md) {
+      position: static;
+    }
+  }
+
+  &__container {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  &--bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+}
+
+.pl-20 {
+  padding-left: 20px;
+}
+
+.hero {
+  overflow: hidden;
+  position: relative;
+
+  &__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    width: 100%;
+    height: 80vh;
+    object-fit: cover;
+    transform-origin: center center;
+
+    &-container {
+      height: 80vh;
+      overflow: hidden;
+    }
+  }
+  &__text-container {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+  }
+  &__text {
+    font-family: $font-gillsans;
+    font-weight: 300;
+    color: $white;
+    font-size: 5.5rem;
+    text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
+    text-wrap: balance;
+    line-height: 1;
+    z-index: 2;
+
+    @include mq($until: $breakpoint-md) {
+      font-size: 2.646rem;
+    }
+
+    span {
+      display: block;
+    }
+  }
+}
+
+.sticky {
+  position: sticky;
+  top: 50px;
+  z-index: 1;
+}
+
+.card {
+  overflow: hidden;
+  height: 100%;
+  &__image {
+    height: 30rem;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  &__overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to bottom, #0000, #000 80%, #000);
+    height: 50%;
+    width: 100%;
+    border-radius: 15px;
+  }
+
+  &__content {
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: start;
+    justify-content: flex-end;
+  }
+}
+
+.cta {
+  text-align: center;
+  border-radius: $border-radius;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  width: auto;
+  padding: 1.1em;
+  font-size: 0.75rem;
+  font-family: $font-roboto;
+  font-weight: 500;
+  box-shadow: 5px 5px 30px #0006;
+  color: $primary-color;
+  display: flex;
+  justify-content: center;
+
+  &--teal {
+    background: $teal-background-gradient;
+    border-radius: $border-radius;
+    position: relative;
+    border: none;
+    outline: none;
+    color: $white;
+
+    &:hover {
+      background: linear-gradient(to bottom, $teal 0%, $teal 100%);
+    }
+  }
+
+  &--white {
+    background-color: $white;
+  }
+
+  &--xs {
+    width: 130px;
+    padding: 0.6em 0;
+  }
+
+  &--sm {
+    width: 200px;
+  }
+}
+
+.lead-text {
+  font-family: $font-gillsans;
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1;
+  text-wrap-style: balance;
+
+  @include mq($until: $breakpoint-md) {
+    font-size: 2rem;
+  }
+
+  &--md {
+    font-size: 1.4rem;
+    font-weight: 400;
+  }
+
+  &--white {
+    color: $white;
+  }
+
+  &--mb {
+    margin-bottom: 30px;
+  }
+}
+.text-white {
+  color: $white;
+}
+
+.reverse-sm {
+  flex-direction: column-reverse;
+}
+
+.justify-center {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100%;
+  gap: 30px;
+  align-content: center;
+}
+
+.js-batch {
+  opacity: 0;
+}
+
+.video {
+  position: relative;
+  z-index: 10;
+  cursor: pointer;
+  width: 100%;
+
+  &__container {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.text {
+  &__container {
+    padding: 0 100px 0 45px;
+
+    @include mq($until: $breakpoint-md) {
+      padding: 0 20px;
+    }
+  }
+}
+
+.swiper {
+  &__controls {
+    display: flex;
+    position: relative;
+    align-items: center;
+    gap: 8px;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  &__line {
+    order: 2;
+    flex-grow: 1;
+    width: 100%;
+    border-top: 3px solid $white;
+  }
+
+  &__pagination {
+    flex-shrink: 0;
+    order: 1;
+    position: static !important;
+    width: unset !important;
+  }
+
+  &__nav {
+    order: 3;
+    display: flex;
+    gap: 6px;
+  }
+
+  &__btn {
+    position: static !important;
+    margin-top: 0 !important;
+    background-color: $primary-color;
+    border-radius: 50%;
+    width: 30px !important;
+    height: 30px !important;
+
+    svg {
+      width: 22px !important;
+      height: 22px !important;
+    }
+  }
+}

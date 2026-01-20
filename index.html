@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GSAP Demo - TypeScript & SCSS</title>
+  </head>
+  <body>
+    <header class="header full">
+      <a href="/"><img class="header__logo" src="./assets/gap-logo.png" alt="the gap partnership logo" /></a>
+      <div class="header__nav">
+        <nav class="nav">
+          <ul class="nav__list">
+            <li class="nav__item__center"><a href="/solutions/" id="">Negotiation solutions</a></li>
+            <li class="nav__item__center"><a href="/insights/" id="">Insights</a></li>
+            <li class="nav__item__center"><a href="/our-business/" id="">Our business</a></li>
+            <li class="nav__item__center"><a href="/contact-us/" id="">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="language js-language-trigger">
+          <a class="language__toggle js-language-selector">
+            <svg xmlns="http://www.w3.org/2000/svg" class="language__icon" viewBox="0 0 640 640">
+              <path d="M511.6 239C480 164.4 406.1 112 320 112C297.9 112 276.6 115.5 256.6 121.8C256.2 123.8 256 125.9 256 128L256 201.4C256 213.9 266.1 224 278.6 224C284.6 224 290.4 221.6 294.6 217.4L310.6 201.4C316.6 195.4 324.7 192 333.2 192L338.7 192C367.2 192 381.5 226.5 361.3 246.6C355.3 252.6 347.2 256 338.7 256L277.2 256C268.7 256 260.6 259.4 254.6 265.4L233.3 286.7C227.3 292.7 223.9 300.8 223.9 309.3L223.9 352C223.9 369.7 238.2 384 255.9 384L287.9 384C305.6 384 319.9 398.3 319.9 416L319.9 448C319.9 465.7 334.2 480 351.9 480L354.6 480C363.1 480 371.2 476.6 377.2 470.6L406.5 441.3C412.5 435.3 415.9 427.2 415.9 418.7L415.9 400C415.9 391.2 423.1 384 431.9 384C440.7 384 447.9 376.8 447.9 368L447.9 333.3C447.9 324.8 444.5 316.7 438.5 310.7L422.5 294.7C418.3 290.5 415.9 284.7 415.9 278.7C415.9 266.2 426 256.1 438.5 256.1L483.5 256.1C495.9 256.1 506.2 249 511.5 239.1zM64 320C64 178.6 178.6 64 320 64C461.4 64 576 178.6 576 320C576 461.4 461.4 576 320 576C178.6 576 64 461.4 64 320z" fill="#fff" />
+            </svg>
+            <div class="language__current">UK</div>
+            <svg width="20" height="20" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="50,75 25,25 75,25" fill="white"></polygon>
+            </svg>
+          </a>
+          <ul class="language__dropdown js-language-dropdown">
+            <li><a class="language__option" href="/au/">AU</a></li>
+            <li><a class="language__option" href="/br/">BR</a></li>
+            <li><a class="language__option" href="/ca/">CA</a></li>
+            <li><a class="language__option" href="/de/">DE</a></li>
+            <li><a class="language__option" href="/es/">ES</a></li>
+            <li><a class="language__option" href="/fr/">FR</a></li>
+            <li><a class="language__option" href="/hk/">HK</a></li>
+            <li><a class="language__option" href="/it/">IT</a></li>
+            <li><a class="language__option" href="/jp/">JP</a></li>
+            <li><a class="language__option" href="/mx/">MX</a></li>
+            <li><a class="language__option" href="/nl/">NL</a></li>
+            <li><a class="language__option" href="#/">ru</a></li>
+            <li><a class="language__option" href="/sg/">SG</a></li>
+            <li><a class="language__option" href="/us/">US</a></li>
+            <li><a class="language__option" href="/za/">ZA</a></li>
+          </ul>
+        </div>
+        <button class="js-nav-btn nav__hamburger">
+          <span class="line"></span>
+          <span class="line"></span>
+          <span class="line"></span>
+        </button>
+        <ul class="js-hamburger-nav hamburger__nav">
+          <li class="nav__item nav__item--flex">
+            Negotiation solutions
+            <button class="nav__toggle js-nav-toggle">
+              <span class="js-first-line line__toggle"></span>
+              <span class="line__toggle"></span>
+            </button>
+            <ul class="js-subnav subnav">
+              <li class="subnav__item">Overview</li>
+              <li class="subnav__item">Negotiation Consulting</li>
+            </ul>
+          </li>
+          <li class="nav__item">Insights</li>
+          <li class="nav__item">Our business</li>
+        </ul>
+      </div>
+    </header>
+    <main>
+      <!--     Hero Section       -->
+
+      <div class="grid hero">
+        <div class="full-width">
+          <img class="hero__image image--sm js-scale-image" src="./assets/tgp-hero.png" alt="" />
+        </div>
+        <div class="full hero__text-container">
+          <h1 class="hero__text">
+            <span class="js-split">Negotiate smarter.</span>
+            <span class="js-split">Grow faster.</span>
+          </h1>
+        </div>
+      </div>
+
+      <!--     50//50 contained section      -->
+
+      <div class="section--bg-dark-socks">
+        <div class="grid grid--py">
+          <div class="half-left">
+            <img class="image--sm image--rounded js-batch" src="./assets/picture-right-text.png" alt="" />
+          </div>
+          <div class="half-right">
+            <div class="text__container js-batch">
+              <h2 class="lead-text lead-text--mb">We build negotiation strategies that help today's businesses win commercially</h2>
+              <div>Designed, delivered, distinctive. Transforming your daily conversations into a culture of success.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--     50/50 full-width section      -->
+
+      <div class="section--bg-teal">
+        <div class="grid">
+          <div class="half-left">
+            <div class="text-white justify-center section--p-lg">
+              <h2 class="lead-text js-batch">Securing bigger margins. Boosting revenue. Aligning ambitions.</h2>
+              <div class="js-batch">We'll equip you to navigate every challenge with confidence and impact. So you can turn your negotiation skills into your biggest competitive edge.</div>
+              <a href="/" class="cta cta--white cta--sm js-batch">Find out how</a>
+            </div>
+          </div>
+          <div class="content-right">
+            <div class="image__container">
+              <img class="image--full-width js-batch js-scale-image" src="./assets/call-to-action.jpeg" alt="" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--     full-width video section      -->
+      <div class="grid grid--py sticky">
+        <div class="full">
+          <div class="lead-text lead-text--mb">Our story</div>
+          <div class="video">
+            <div class="js-video video__container" data-plyr-provider="vimeo" data-plyr-embed-id="235215203">
+              <!-- <img class="js-batch image--sm image--rounded image--bg" src="./assets/video.jpg" alt="" /> -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--     articles carousel section - sticky on scroll     -->
+      <div class="section--bg-socks">
+        <div class="grid">
+          <div class="full section--py-lg">
+            <div class="section__header section__header--flex">
+              <h2 class="lead-text lead-text--white lead-text--mb">Latest must reads</h2>
+              <a href="/" class="cta cta--white cta--xs">View all</a>
+            </div>
+            <div class="swiper js-news-swiper">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide relative card">
+                  <img class="image--sm image--rounded-sm card__image" src="./assets/article-1.jpg" alt="" />
+                  <div class="card__overlay">
+                    <div class="card__content">
+                      <h3 class="lead-text lead-text--white lead-text--md">Title about the article</h3>
+                      <a href="/" class="cta cta--teal cta--xs">Read more</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="swiper-slide relative card">
+                  <img class="image--sm image--rounded-sm card__image" src="./assets/article-2.jpg" alt="" />
+                  <div class="card__overlay">
+                    <div class="card__content">
+                      <h3 class="lead-text lead-text--white lead-text--md">Title about the article that's a bit longer to see how it goes on two lines</h3>
+                      <a href="/" class="cta cta--teal cta--xs">Read more</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="swiper-slide relative card">
+                  <img class="image--sm image--rounded-sm card__image" src="./assets/article-3.jpg" alt="" />
+                  <div class="card__overlay">
+                    <div class="card__content">
+                      <h3 class="lead-text lead-text--white lead-text--md">Title about the article</h3>
+                      <a href="/" class="cta cta--teal cta--xs">Read more</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="swiper-slide relative card">
+                  <img class="image--sm image--rounded-sm card__image" src="./assets/article-1.jpg" alt="" />
+                  <div class="card__overlay">
+                    <div class="card__content">
+                      <h3 class="lead-text lead-text--white lead-text--md">Title about the article that's a bit longer to see how it goes on two lines</h3>
+                      <a href="/" class="cta cta--teal cta--xs">Read more</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="swiper-slide relative card">
+                  <img class="image--sm image--rounded-sm card__image" src="./assets/article-2.jpg" alt="" />
+                  <div class="card__overlay">
+                    <div class="card__content">
+                      <h3 class="lead-text lead-text--white lead-text--md">Title about the article</h3>
+                      <a href="/" class="cta cta--teal cta--xs">Read more</a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="swiper-slide relative card">
+                  <img class="image--sm image--rounded-sm card__image" src="./assets/article-3.jpg" alt="" />
+                  <div class="card__overlay">
+                    <div class="card__content">
+                      <h3 class="lead-text lead-text--white lead-text--md">Title about the article</h3>
+                      <a href="/" class="cta cta--teal cta--xs">Read more</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="swiper__controls">
+                <div class="swiper__pagination swiper-pagination"></div>
+                <div class="swiper__line"></div>
+                <div class="js-swiper-nav swiper__nav">
+                  <span class="swiper__btn btn--prev swiper-button-prev">
+                    <svg class="arrow-icon" viewBox="2 0 22 22" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M19 11 L7 11 L13 5 M7 11 L13 17" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </span>
+                  <span class="swiper__btn btn--next swiper-button-next">
+                    <svg class="arrow-icon" viewBox="-2 0 22 22" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 11 L15 11 L9 5 M15 11 L9 17" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <section class="section--p-y-70 section--bg-white">
+        <ul class="container logo__list">
+          <li class="logo__item">
+            <img class="logo__image" src="~/assets/image/awards/top-consulting-firm-2024-icon.png" />
+          </li>
+          <li class="logo__item">
+            <img class="logo__image" src="~/assets/image/awards/The Professional Development Consortium - The Gap Partnership - 2024-09-09 (1) (1).png" />
+          </li>
+          <li class="logo__item">
+            <img class="logo__image" src="~/assets/image/awards/Groceryaidaward2023-gold.png" />
+          </li>
+          <li class="logo__item">
+            <img class="logo__image" src="/assets/image/awards/FULL_COLOUR.png" />
+          </li>
+          <li class="logo__item">
+            <img class="logo__image" src="/assets/image/awards/Management-Gold@2x.jpg" />
+          </li>
+          <li class="logo__item">
+            <img class="logo__image" src="/assets/image/awards/Gold-Learning-Award-2021-01.png" />
+          </li>
+        </ul>
+      </section>
+
+      <!-- Sitemap -->
+      <section class="footer">
+        <div class="container">
+          <nav class="footer__nav"></nav>
+        </div>
+      </section>
+      <!-- Logo and legal information -->
+      <div class="footer__info">
+        <div class="container">
+          <div class="footer__container">
+            <div class="footer__info--row">
+              <a href="@Model.HomeLink">
+                <img class="footer__logo" src="/assets/image/common/gap-logo.png" />
+              </a>
+              <div class="footer__address">
+                <div>@Model.FooterLocationName</div>
+                <div>Ashlyns Hall Berkhamsted HP4 2ST UK</div>
+              </div>
+            </div>
+
+            <div class="footer__info--row footer__info--space-between">
+              <a href="@Model.LinkedInLink.Url" id="linkedin-link" target="@Model.LinkedInLink.Target">
+                <img class="footer__icon linkedin-img" src="/assets/image/icon-linkedin.svg" />
+              </a>
+
+              <a href="@Model.TwitterLink.Url" id="twitter-link" target="@Model.TwitterLink.Target">
+                <img class="footer__icon twitter-img" src="/assets/image/icon-twitter.svg" />
+              </a>
+
+              <a href="@Model.InstagramLink.Url" id="instagram-link" target="@Model.InstagramLink.Target">
+                <img class="footer__icon instagram-img" src="/assets/image/icon-instagram.svg" />
+              </a>
+
+              <a href="@Model.YoutubeLink.Url" id="youtube-link" target="@Model.YoutubeLink.Target">
+                <img class="footer__icon youtube-img" src="/assets/image/icon-youtube.png" />
+              </a>
+            </div>
+            <div class="footer__info--row">
+              <a class="footer__link" href="@Model.SitemapLink.Url" id="sitemap" target="@Model.SitemapLink.Target">link name</a>
+
+              <div class="footer__copyright">©2024 The Gap Partnership. All rights reserved.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
