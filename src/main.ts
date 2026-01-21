@@ -114,7 +114,7 @@ function initAnimations(): void {
 
         // Different durations based on scroll direction
         const duration = direction === 1 ? 0.8 : 0.3;
-
+        const hamburgerNav = document.querySelector(".js-hamburger-nav") as HTMLElement;
         scrollTween = gsap.to(header, {
           maxWidth: progress === 1 ? "100vw" : width + "px",
           top: progress === 1 ? 0 : 20,
@@ -122,6 +122,14 @@ function initAnimations(): void {
           duration: duration,
           ease: "power2.out",
         });
+
+        if (hamburgerNav && !window.tgp.isDesktop) {
+          if (progress === 1) {
+            hamburgerNav.classList.add("hamburger__nav--scrolled");
+          } else {
+            hamburgerNav.classList.remove("hamburger__nav--scrolled");
+          }
+        }
       },
     });
   }
