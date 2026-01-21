@@ -13,17 +13,23 @@ import * as Plyr from "plyr";
 declare global {
   interface Window {
     tgp: {
-      isDesktop?: boolean;
+      isBreakpointXl?: boolean;
+      isBreakpointXxl?: boolean;
     };
   }
 }
 
-const isDesktop = () => {
+const isBreakpointXl = () => {
   return window.matchMedia("(min-width: 1200px)").matches;
 };
 
+const isBreakpointXxl = () => {
+  return window.matchMedia("(min-width: 1920px)").matches;
+};
+
 window.tgp = window.tgp || {};
-window.tgp.isDesktop = isDesktop();
+window.tgp.isBreakpointXl = isBreakpointXl();
+window.tgp.isBreakpointXxl = isBreakpointXxl();
 
 gsap.registerPlugin(ScrollTrigger, ScrambleTextPlugin);
 
@@ -69,13 +75,23 @@ function initAnimations(): void {
   });
 
   const header = document.querySelector(".header") as HTMLElement;
-  const width = window.tgp.isDesktop ? (window.innerWidth / 12) * 6 : window.innerWidth - 40;
+  let width = window.tgp.isBreakpointXxl ? (window.innerWidth / 12) * 6 : window.innerWidth - 40;
+
+  window.addEventListener("resize", () => {
+    window.tgp.isBreakpointXxl = isBreakpointXxl();
+    width = window.tgp.isBreakpointXxl ? (window.innerWidth / 12) * 6 : window.innerWidth - 40;
+    if (window.scrollY < 200) {
+      gsap.set(header, {
+        maxWidth: width + "px",
+      });
+    }
+  });
 
   if (header) {
     // Set initial state explicitly
     gsap.set(header, {
       maxWidth: width + "px",
-      top: window.tgp.isDesktop ? 20 : 10,
+      top: window.tgp.isBreakpointXl ? 20 : 10,
       borderRadius: 25,
     });
 
@@ -123,7 +139,7 @@ function initAnimations(): void {
           ease: "power2.out",
         });
 
-        if (hamburgerNav && !window.tgp.isDesktop) {
+        if (hamburgerNav && !window.tgp.isBreakpointXl) {
           if (progress === 1) {
             hamburgerNav.classList.add("hamburger__nav--scrolled");
           } else {
@@ -166,7 +182,7 @@ const initSwiper = () => {
         slidesPerView: 2,
         spaceBetween: 30,
       },
-      1270: {
+      1200: {
         slidesPerView: 3,
         spaceBetween: 40,
         touchRatio: 0,
@@ -257,7 +273,7 @@ const initNav = () => {
     const isOpen = hamburgerNav.classList.contains("hamburger__nav--open");
 
     if (!isOpen) {
-      if (!window.tgp.isDesktop) {
+      if (!window.tgp.isBreakpointXl) {
         document.body.style.height = "100vh";
         document.body.style.overflow = "hidden";
       }
@@ -267,13 +283,13 @@ const initNav = () => {
 
       gsap.set(hamburgerNav, { width: 400 }); // Set width immediately
       gsap.to(hamburgerNav, {
-        height: window.tgp.isDesktop ? "auto" : "calc(100vh + 20px)",
+        height: window.tgp.isBreakpointXl ? "auto" : "calc(100vh + 20px)",
         autoAlpha: 1,
         duration: 0.5,
         ease: "power2.out",
       });
     } else {
-      if (!window.tgp.isDesktop) {
+      if (!window.tgp.isBreakpointXl) {
         document.body.style.height = "unset";
         document.body.style.overflow = "initial";
       }
