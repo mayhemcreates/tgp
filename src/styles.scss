@@ -23,6 +23,8 @@ $teal-3: #46aa92;
 $teal-4: #127172;
 $white: #ededed;
 $primary-color: #161412;
+$graphite: #161412;
+$graphite-light: #2e2e2e;
 $border-radius: 25px;
 $font-gillsans: "GillSansLight", "Roboto", "Helvetica Neue", Arial, sans-serif;
 $font-roboto: "Roboto", sans-serif;
@@ -58,20 +60,39 @@ $teal-background-gradient: linear-gradient(to bottom, $teal 4%, $teal-2);
 }
 
 body {
-  font-family: $font-roboto;
-  line-height: 1.6;
+  font-family: $font-gillsans;
   color: $primary-color;
   background: $white;
   min-height: 100vh;
   position: relative;
   text-wrap: pretty;
+  font-size: 1.188rem;
+  @include mq($from: $breakpoint-md) {
+    font-size: 1.688rem;
+  }
 }
 
 // --------LAYOUT CLASSES ---------
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns:
+    minmax(0, 1fr)
+    repeat(10, minmax(0, 140px))
+    minmax(0, 1fr);
+  max-width: 100vw;
+  margin: 0 auto;
+
+  @include mq($until: $breakpoint-xxl) {
+    grid-template-columns:
+      minmax(0, 140px)
+      repeat(10, minmax(0, 140px))
+      minmax(0, 140px);
+  }
+
+  &--px {
+    padding: 0 140px;
+  }
 
   @include mq($until: $breakpoint-md) {
     display: flex;
@@ -83,48 +104,65 @@ body {
     padding: 70px 0;
 
     @include mq($until: $breakpoint-lg) {
-      padding: 40px 20px;
+      padding: 40px 0;
     }
   }
 }
 
 .full-width {
   grid-column: 1 / 13;
-  height: 80vh;
+  height: 700px;
   overflow: hidden;
   position: relative;
-
+  @include mq($until: $breakpoint-md) {
+    height: 500px;
+  }
   @include mq($until: $breakpoint-lg) {
     width: 100%;
   }
 }
 
 .full {
-  grid-column: 4 / 10; /* columns 3-10 = 8 columns */
+  grid-column: 2 / 12; /* columns 3-10 = 8 columns */
   width: 100%;
   margin: auto;
-
+  @include mq($until: $breakpoint-md) {
+    padding: 0 32px;
+  }
   @include mq($until: $breakpoint-xxxl) {
     grid-column: 2 / 12; /* 3 columns */
+  }
+
+  &--px-sm {
+    @include mq($until: $breakpoint-md) {
+      padding: 0 12px;
+    }
   }
 }
 
 .half-left {
-  grid-column: 4 / 7; /* 3 columns */
-
+  grid-column: 2 / 7; /* 3 columns */
+  padding-right: 40px;
+  @include mq($until: $breakpoint-md) {
+    padding: 0 32px;
+  }
   @include mq($until: $breakpoint-xxxl) {
     grid-column: 2 / 7; /* 3 columns */
   }
 }
+
 .half-right {
-  grid-column: 7 / 10; /* 3 columns, gap at 6-7 */
+  grid-column: 7 / 12; /* 3 columns, gap at 6-7 */
+  padding-left: 40px;
+  padding-right: 80px;
+
+  @include mq($until: $breakpoint-md) {
+    padding: 0 32px;
+  }
+
   @include mq($until: $breakpoint-xxxl) {
     grid-column: 7 / 12; /* 3 columns */
   }
-}
-
-.content-left {
-  grid-column: 4 / 7; /* 4 columns */
 }
 
 .content-right {
@@ -165,12 +203,54 @@ body {
   opacity: 0;
 }
 
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 .justify-center {
   display: flex;
   flex-wrap: wrap;
   height: 100%;
   gap: 30px;
   align-content: center;
+}
+
+.reverse-sm {
+  flex-direction: column-reverse;
+}
+
+.inline {
+  display: inline-block !important;
+}
+
+// for titles
+.mb-50 {
+  margin-bottom: 50px;
+  @include mq($until: $breakpoint-xxxl) {
+    margin-bottom: 30px;
+  }
+}
+
+.col-indent {
+  padding-left: 80px;
+  @include mq($until: $breakpoint-xxxl) {
+    padding-left: 32px;
+  }
+
+  &--lg {
+    @include mq($until: $breakpoint-xxxl) {
+      padding-left: 0;
+    }
+  }
+
+  &--sm {
+    @include mq($from: $breakpoint-xxxl) {
+      padding-left: 0;
+    }
+  }
 }
 
 // -------- SECTIONS ---------
@@ -232,9 +312,11 @@ body {
   }
 
   &--py-lg {
-    padding: 90px 0;
+    padding-top: 90px;
+    padding-bottom: 90px;
     @include mq($until: $breakpoint-md) {
-      padding: 40px 20px;
+      padding-top: 40px;
+      padding-bottom: 40px;
     }
   }
 
@@ -259,10 +341,11 @@ body {
   text-align: center;
   text-decoration: none;
   width: auto;
-  padding: 1.1em;
-  font-size: 0.75rem;
+  height: 50px;
+  padding: 17px;
+  font-size: 1rem;
   font-family: $font-roboto;
-  font-weight: 500;
+  font-weight: 400;
   box-shadow: 5px 5px 30px #0006;
   color: $primary-color;
   display: flex;
@@ -285,13 +368,14 @@ body {
     background-color: $white;
   }
 
-  &--xs {
-    width: 130px;
-    padding: 0.6em 0;
-  }
-
   &--sm {
     width: 200px;
+    @include mq($until: $breakpoint-md) {
+      width: 200px;
+    }
+  }
+  &--align-right {
+    margin-left: auto;
   }
 }
 
@@ -309,13 +393,19 @@ body {
   left: 50%;
   top: 20px;
   transform: translateX(-50%);
+  font-size: 1.063rem;
+  font-family: $font-roboto;
 
   @include mq($until: $breakpoint-md) {
     padding: 0 20px;
+    height: 60px;
   }
 
   &__logo {
     height: 60px;
+    @include mq($until: $breakpoint-md) {
+      height: 40px;
+    }
   }
 
   &__nav {
@@ -366,6 +456,9 @@ body {
     &--flex {
       display: block;
       position: relative;
+    }
+
+    &--center {
     }
   }
 
@@ -649,19 +742,23 @@ body {
     left: 0;
     z-index: -1;
     width: 100%;
-    height: 80vh;
+    height: 700px;
     object-fit: cover;
     transform-origin: center center;
 
-    &-container {
-      height: 80vh;
-      overflow: hidden;
+    @include mq($until: $breakpoint-md) {
+      height: 500px;
     }
   }
   &__text-container {
     position: absolute;
-    bottom: 20px;
+    bottom: 140px;
     left: 20px;
+
+    @include mq($until: $breakpoint-md) {
+      bottom: 50px;
+      left: 0;
+    }
   }
   &__text {
     font-family: $font-gillsans;
@@ -702,7 +799,13 @@ body {
     border-radius: 15px;
   }
 
+  &__intro {
+    font-family: $font-roboto;
+    font-size: 0.938rem;
+  }
+
   &__content {
+    color: $white;
     width: 100%;
     height: 100%;
     padding: 40px;
@@ -716,18 +819,21 @@ body {
 
 .lead-text {
   font-family: $font-gillsans;
-  font-size: 2.5rem;
+  font-size: 3.125rem;
   font-weight: 300;
-  line-height: 1;
-  text-wrap-style: balance;
+  line-height: 3.438rem;
 
   @include mq($until: $breakpoint-md) {
-    font-size: 2rem;
+    font-size: 1.438rem;
+    line-height: 1.875rem;
+  }
+
+  &--bold {
+    font-weight: 400;
   }
 
   &--md {
-    font-size: 1.4rem;
-    font-weight: 400;
+    font-size: 1.938rem;
   }
 
   &--white {
@@ -753,10 +859,10 @@ body {
 
 .text {
   &__container {
-    padding: 0 100px 0 45px;
+    padding: 0 0 0 0;
 
     @include mq($from: $breakpoint-xl, $until: $breakpoint-xxxl) {
-      padding: 0 200px 0 45px;
+      padding: 0 0 0 0;
     }
 
     @include mq($until: $breakpoint-md) {
@@ -766,46 +872,60 @@ body {
 }
 
 .swiper {
+  margin-top: 50px;
+  @include mq($until: $breakpoint-md) {
+    margin-top: 30px;
+  }
+
   &__controls {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     position: relative;
     align-items: center;
     gap: 8px;
     justify-content: space-between;
     margin-top: 20px;
-  }
 
-  &__line {
-    order: 2;
-    flex-grow: 1;
-    width: 100%;
-    border-top: 3px solid $white;
+    @include mq($until: $breakpoint-md) {
+      display: block;
+    }
   }
-
   &__pagination {
     flex-shrink: 0;
-    order: 1;
     position: static !important;
     width: unset !important;
   }
 
   &__nav {
-    order: 3;
+    grid-column: 2/3;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 6px;
+    @include mq($until: $breakpoint-md) {
+      padding: 0 33px;
+    }
   }
 
   &__btn {
     position: static !important;
     margin-top: 0 !important;
-    background-color: $primary-color;
+    background-color: $graphite-light;
     border-radius: 50%;
-    width: 30px !important;
-    height: 30px !important;
+    width: 45px !important;
+    height: 45px !important;
 
     svg {
-      width: 22px !important;
-      height: 22px !important;
+      width: auto !important;
+      height: 18px !important;
+    }
+  }
+
+  &__cta {
+    @include mq($until: $breakpoint-md) {
+      order: 3;
+      margin-top: 20px;
+      width: 100%;
     }
   }
 }

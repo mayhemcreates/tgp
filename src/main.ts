@@ -75,11 +75,11 @@ function initAnimations(): void {
   });
 
   const header = document.querySelector(".header") as HTMLElement;
-  let width = window.tgp.isBreakpointXxl ? (window.innerWidth / 12) * 6 : window.innerWidth - 40;
+  let width = window.tgp.isBreakpointXxl ? 1400 : window.innerWidth - 24;
 
   window.addEventListener("resize", () => {
     window.tgp.isBreakpointXxl = isBreakpointXxl();
-    width = window.tgp.isBreakpointXxl ? (window.innerWidth / 12) * 6 : window.innerWidth - 40;
+    width = window.tgp.isBreakpointXxl ? 1400 : window.innerWidth - 24;
     if (window.scrollY < 200) {
       gsap.set(header, {
         maxWidth: width + "px",
@@ -92,7 +92,7 @@ function initAnimations(): void {
     gsap.set(header, {
       maxWidth: width + "px",
       top: window.tgp.isBreakpointXl ? 20 : 10,
-      borderRadius: 25,
+      borderRadius: window.tgp.isBreakpointXl ? 15 : 10,
     });
 
     let scrollTween: gsap.core.Tween | null = null;
@@ -134,7 +134,7 @@ function initAnimations(): void {
         scrollTween = gsap.to(header, {
           maxWidth: progress === 1 ? "100vw" : width + "px",
           top: progress === 1 ? 0 : 20,
-          borderRadius: progress === 1 ? 0 : 25,
+          borderRadius: progress === 1 ? 0 : window.tgp.isBreakpointXl ? 15 : 10,
           duration: duration,
           ease: "power2.out",
         });
