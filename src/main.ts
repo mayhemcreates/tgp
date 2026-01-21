@@ -7,7 +7,7 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import Plyr from "plyr";
+import * as Plyr from "plyr";
 
 // Extend Window interface to include tgp property
 declare global {
@@ -193,7 +193,7 @@ const initialiseVideo = () => {
 
   videoItems.forEach((video) => {
     // Initialize player immediately to start preloading
-    const player = new Plyr(video, {
+    const player = new Plyr.default(video, {
       controls: ["play-large", "play", "progress", "current-time", "mute", "volume", "captions", "settings", "fullscreen"],
       settings: ["captions"],
       autoplay: false,
