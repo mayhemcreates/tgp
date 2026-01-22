@@ -21,6 +21,7 @@ $teal-1: #1a9393;
 $teal-2: #00747a;
 $teal-3: #46aa92;
 $teal-4: #127172;
+$lime: #aab619;
 $white: #ededed;
 $primary-color: #161412;
 $graphite: #161412;
@@ -457,7 +458,36 @@ body {
       gap: 12px;
     }
     @include mq($until: $breakpoint-sm) {
-      gap: 0;
+      gap: 20px;
+    }
+  }
+
+  &__login {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    gap: 6px;
+    color: $teal-3;
+    font-family: $font-gillsans;
+    font-size: 1.188rem;
+    transition: all 0.3s ease;
+
+    path {
+      transition: all 0.3s ease;
+    }
+
+    &:hover {
+      color: $lime;
+
+      path {
+        fill: $lime;
+      }
+    }
+
+    &--hidden-sm {
+      @include mq($until: $breakpoint-lg) {
+        display: none;
+      }
     }
   }
 }
