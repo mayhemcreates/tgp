@@ -139,8 +139,12 @@ body {
   width: 100%;
   margin: auto;
   @include mq($until: $breakpoint-md) {
+    padding: 0 75px;
+  }
+  @include mq($until: $breakpoint-sm) {
     padding: 0 32px;
   }
+
   @include mq($until: $breakpoint-xxxl) {
     grid-column: 2 / 12; /* 3 columns */
   }
@@ -150,13 +154,22 @@ body {
       padding: 0 12px;
     }
   }
+
+  &--px-md {
+    @include mq($from: $breakpoint-sm, $until: $breakpoint-lg) {
+      padding: 0 37px;
+    }
+  }
 }
 
 .half-left {
   grid-column: 2 / 7; /* 3 columns */
   padding-right: 40px;
-  @include mq($until: $breakpoint-md) {
+  @include mq($until: $breakpoint-sm) {
     padding: 0 32px;
+  }
+  @include mq($until: $breakpoint-md) {
+    padding: 0 75px;
   }
   @include mq($until: $breakpoint-xxxl) {
     grid-column: 2 / 7; /* 3 columns */
@@ -168,10 +181,12 @@ body {
   padding-left: 40px;
   padding-right: 80px;
 
-  @include mq($until: $breakpoint-md) {
+  @include mq($until: $breakpoint-sm) {
     padding: 0 32px;
   }
-
+  @include mq($until: $breakpoint-md) {
+    padding: 0 75px;
+  }
   @include mq($until: $breakpoint-xxxl) {
     grid-column: 7 / 12; /* 3 columns */
   }
@@ -256,19 +271,13 @@ body {
   padding-left: 80px;
 
   @include mq($until: $breakpoint-xl) {
+    padding-left: 75px;
+  }
+  @include mq($until: $breakpoint-lg) {
     padding-left: 32px;
   }
-
-  &--lg {
-    @include mq($until: $breakpoint-md) {
-      padding-left: 0;
-    }
-  }
-
-  &--sm {
-    @include mq($from: $breakpoint-xl) {
-      padding-left: 0;
-    }
+  @include mq($until: $breakpoint-sm) {
+    padding-left: 0;
   }
 }
 
@@ -372,6 +381,7 @@ body {
   align-items: center;
   flex-shrink: 0;
   line-height: unset;
+  transition: all 0.3s ease;
 
   &--teal {
     background: $teal-background-gradient;
@@ -388,6 +398,11 @@ body {
 
   &--white {
     background-color: $white;
+
+    &:hover {
+      background-color: $teal-4;
+      color: $white;
+    }
   }
 
   &--sm {
@@ -482,6 +497,16 @@ body {
       display: block;
       position: relative;
     }
+
+    &--center {
+      a {
+        transition: all 0.3s ease;
+
+        &:hover {
+          color: $teal-1;
+        }
+      }
+    }
   }
 
   &__hamburger {
@@ -492,6 +517,12 @@ body {
     cursor: pointer;
     position: relative;
     z-index: 1000;
+
+    &:hover {
+      .line {
+        background-color: $teal-1;
+      }
+    }
   }
 
   &__toggle {
@@ -668,6 +699,7 @@ body {
     height: 100%;
     padding: 0 0.5rem;
     gap: 5px;
+    cursor: pointer;
   }
 
   &__dropdown {
@@ -797,7 +829,7 @@ body {
       font-size: 4.688rem;
     }
 
-    @include mq($until: $breakpoint-md) {
+    @include mq($until: $breakpoint-sm) {
       font-size: 3.125rem;
     }
     span {
@@ -873,6 +905,9 @@ body {
 
   &--pl {
     @include mq($until: $breakpoint-lg) {
+      padding-left: 37px;
+    }
+    @include mq($until: $breakpoint-sm) {
       padding-left: 20px;
     }
   }
