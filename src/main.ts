@@ -24,7 +24,7 @@ const isBreakpointXl = () => {
 };
 
 const isBreakpointXxl = () => {
-  return window.matchMedia("(min-width: 1920px)").matches;
+  return window.matchMedia("(min-width: 1680px)").matches;
 };
 
 window.tgp = window.tgp || {};
@@ -75,11 +75,13 @@ function initAnimations(): void {
   });
 
   const header = document.querySelector(".header") as HTMLElement;
-  let width = window.tgp.isBreakpointXxl ? 1400 : window.innerWidth - 24;
+  let width = window.tgp.isBreakpointXxl ? 1400 : window.tgp.isBreakpointXl ? window.innerWidth - 280 : window.innerWidth - 24;
 
   window.addEventListener("resize", () => {
     window.tgp.isBreakpointXxl = isBreakpointXxl();
-    width = window.tgp.isBreakpointXxl ? 1400 : window.innerWidth - 24;
+    window.tgp.isBreakpointXl = isBreakpointXl();
+
+    width = window.tgp.isBreakpointXxl ? 1400 : window.tgp.isBreakpointXl ? window.innerWidth - 280 : window.innerWidth - 24;
     if (window.scrollY < 200) {
       gsap.set(header, {
         maxWidth: width + "px",
@@ -178,7 +180,7 @@ const initSwiper = () => {
     spaceBetween: 15,
     speed: 500,
     breakpoints: {
-      768: {
+      580: {
         slidesPerView: 2,
         spaceBetween: 30,
       },

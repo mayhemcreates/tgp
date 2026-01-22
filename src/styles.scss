@@ -10,10 +10,10 @@
 $breakpoint-xs: 0;
 $breakpoint-smaller: 420px;
 $breakpoint-sm: 576px;
-$breakpoint-md: 768px;
+$breakpoint-md: 830px;
 $breakpoint-lg: 1200px;
 $breakpoint-xl: 1290px;
-$breakpoint-xxl: 1600px;
+$breakpoint-xxl: 1680px;
 $breakpoint-xxxl: 1920px;
 
 $teal: #177071;
@@ -67,8 +67,13 @@ body {
   position: relative;
   text-wrap: pretty;
   font-size: 1.188rem;
+
   @include mq($from: $breakpoint-md) {
     font-size: 1.688rem;
+  }
+  @include mq($until: $breakpoint-xl) {
+    font-size: 1.375rem;
+    line-height: 1.563rem;
   }
 }
 
@@ -85,19 +90,26 @@ body {
 
   @include mq($until: $breakpoint-xxl) {
     grid-template-columns:
-      minmax(0, 140px)
+      140px
       repeat(10, minmax(0, 140px))
-      minmax(0, 140px);
+      140px;
   }
 
-  &--px {
-    padding: 0 140px;
+  @include mq($until: $breakpoint-lg) {
+    grid-template-columns:
+      12px
+      repeat(10, minmax(0, 140px))
+      12px;
   }
 
   @include mq($until: $breakpoint-md) {
     display: flex;
     flex-direction: column;
     gap: 40px;
+  }
+
+  &--px {
+    padding: 0 140px;
   }
 
   &--py {
@@ -134,7 +146,7 @@ body {
   }
 
   &--px-sm {
-    @include mq($until: $breakpoint-md) {
+    @include mq($until: $breakpoint-sm) {
       padding: 0 12px;
     }
   }
@@ -195,8 +207,11 @@ body {
 
 .sticky {
   position: sticky;
-  top: 50px;
+  top: 140px;
   z-index: 1;
+  @include mq($until: $breakpoint-md) {
+    top: 50px;
+  }
 }
 
 .js-batch {
@@ -224,6 +239,9 @@ body {
 
 .inline {
   display: inline-block !important;
+  @include mq($until: $breakpoint-lg) {
+    display: flex !important;
+  }
 }
 
 // for titles
@@ -236,18 +254,19 @@ body {
 
 .col-indent {
   padding-left: 80px;
-  @include mq($until: $breakpoint-xxxl) {
+
+  @include mq($until: $breakpoint-xl) {
     padding-left: 32px;
   }
 
   &--lg {
-    @include mq($until: $breakpoint-xxxl) {
+    @include mq($until: $breakpoint-md) {
       padding-left: 0;
     }
   }
 
   &--sm {
-    @include mq($from: $breakpoint-xxxl) {
+    @include mq($from: $breakpoint-xl) {
       padding-left: 0;
     }
   }
@@ -341,8 +360,8 @@ body {
   text-align: center;
   text-decoration: none;
   width: auto;
-  height: 50px;
-  padding: 17px;
+  height: 45px;
+  padding: 12px;
   font-size: 1rem;
   font-family: $font-roboto;
   font-weight: 400;
@@ -350,6 +369,9 @@ body {
   color: $primary-color;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  line-height: unset;
 
   &--teal {
     background: $teal-background-gradient;
@@ -370,10 +392,8 @@ body {
 
   &--sm {
     width: 200px;
-    @include mq($until: $breakpoint-md) {
-      width: 200px;
-    }
   }
+
   &--align-right {
     margin-left: auto;
   }
@@ -401,6 +421,10 @@ body {
     height: 60px;
   }
 
+  > a {
+    line-height: 0;
+  }
+
   &__logo {
     height: 60px;
     @include mq($until: $breakpoint-md) {
@@ -414,10 +438,10 @@ body {
     height: 100%;
     align-items: center;
 
-    @include mq($until: $breakpoint-xxxl) {
-      gap: 10px;
-    }
     @include mq($until: $breakpoint-md) {
+      gap: 12px;
+    }
+    @include mq($until: $breakpoint-sm) {
       gap: 0;
     }
   }
@@ -430,6 +454,7 @@ body {
     height: 100%;
     gap: 40px;
     list-style-type: none;
+    margin-right: 70px;
 
     @include mq($until: $breakpoint-xl) {
       display: none;
@@ -457,14 +482,11 @@ body {
       display: block;
       position: relative;
     }
-
-    &--center {
-    }
   }
 
   &__hamburger {
-    width: 25px;
-    height: 25px;
+    width: 36px;
+    height: 36px;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -601,7 +623,7 @@ body {
         top: -20px;
         right: 0;
         left: -20px;
-        width: 100vw !important;
+        width: calc(100vw + 20px) !important;
         height: 100vh;
         border-radius: 0;
         padding-top: 150px;
@@ -645,6 +667,7 @@ body {
     color: $white;
     height: 100%;
     padding: 0 0.5rem;
+    gap: 5px;
   }
 
   &__dropdown {
@@ -664,12 +687,12 @@ body {
   }
 
   &__icon {
-    height: 25px;
-    width: 25px;
+    height: 15px;
+    width: 15px;
   }
 
   &__current {
-    font-size: 0.85rem;
+    font-size: 1.063rem;
   }
 
   &__option {
@@ -681,7 +704,7 @@ body {
     color: #fff;
     text-transform: uppercase;
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 1.063rem;
     padding: 0.5rem 0;
     box-sizing: border-box;
     background-color: $teal-1;
@@ -764,16 +787,19 @@ body {
     font-family: $font-gillsans;
     font-weight: 300;
     color: $white;
-    font-size: 5.5rem;
+    font-size: 6.875rem;
     text-shadow: 0px 3px 6px rgba(0, 0, 0, 0.25);
     text-wrap: balance;
     line-height: 1;
     z-index: 2;
 
-    @include mq($until: $breakpoint-md) {
-      font-size: 2.646rem;
+    @include mq($until: $breakpoint-xl) {
+      font-size: 4.688rem;
     }
 
+    @include mq($until: $breakpoint-md) {
+      font-size: 3.125rem;
+    }
     span {
       display: block;
     }
@@ -793,7 +819,7 @@ body {
     position: absolute;
     bottom: 0;
     left: 0;
-    background: linear-gradient(to bottom, #0000, #000 80%, #000);
+    background: linear-gradient(0deg, #000 22.71%, rgba(0, 0, 0, 0) 100%);
     height: 50%;
     width: 100%;
     border-radius: 15px;
@@ -802,6 +828,7 @@ body {
   &__intro {
     font-family: $font-roboto;
     font-size: 0.938rem;
+    font-weight: 500;
   }
 
   &__content {
@@ -815,6 +842,18 @@ body {
     align-items: start;
     justify-content: flex-end;
   }
+
+  &__cta {
+    @include mq($until: $breakpoint-xl) {
+      width: 200px;
+      height: 40px;
+    }
+    @include mq($until: $breakpoint-lg) {
+      width: 90%;
+      height: 36px;
+      font-size: 0.938rem;
+    }
+  }
 }
 
 .lead-text {
@@ -823,9 +862,19 @@ body {
   font-weight: 300;
   line-height: 3.438rem;
 
+  @include mq($until: $breakpoint-xl) {
+    font-size: 2.5rem;
+    line-height: 2.875rem;
+  }
   @include mq($until: $breakpoint-md) {
-    font-size: 1.438rem;
-    line-height: 1.875rem;
+    font-size: 1.938rem;
+    line-height: 2.313rem;
+  }
+
+  &--pl {
+    @include mq($until: $breakpoint-lg) {
+      padding-left: 20px;
+    }
   }
 
   &--bold {
@@ -833,7 +882,8 @@ body {
   }
 
   &--md {
-    font-size: 1.938rem;
+    font-size: 1.688rem;
+    line-height: 1.875rem;
   }
 
   &--white {
@@ -882,7 +932,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
     position: relative;
     align-items: center;
-    gap: 8px;
+    gap: 25px;
     justify-content: space-between;
     margin-top: 20px;
 
@@ -902,7 +952,7 @@ body {
     justify-content: space-between;
     align-items: center;
     gap: 6px;
-    @include mq($until: $breakpoint-md) {
+    @include mq($until: $breakpoint-sm) {
       padding: 0 33px;
     }
   }
@@ -922,7 +972,7 @@ body {
   }
 
   &__cta {
-    @include mq($until: $breakpoint-md) {
+    @include mq($until: $breakpoint-sm) {
       order: 3;
       margin-top: 20px;
       width: 100%;
