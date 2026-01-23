@@ -166,14 +166,17 @@ body {
 .half-left {
   grid-column: 2 / 7; /* 3 columns */
   padding-right: 40px;
-  @include mq($until: $breakpoint-sm) {
-    padding: 0 32px;
+
+  @include mq($until: $breakpoint-xxxl) {
+    grid-column: 2 / 7; /* 3 columns */
   }
+
   @include mq($until: $breakpoint-md) {
     padding: 0 75px;
   }
-  @include mq($until: $breakpoint-xxxl) {
-    grid-column: 2 / 7; /* 3 columns */
+
+  @include mq($until: $breakpoint-sm) {
+    padding: 0 32px;
   }
 }
 
@@ -182,14 +185,14 @@ body {
   padding-left: 40px;
   padding-right: 80px;
 
-  @include mq($until: $breakpoint-sm) {
-    padding: 0 32px;
+  @include mq($until: $breakpoint-xxxl) {
+    grid-column: 7 / 12; /* 3 columns */
   }
   @include mq($until: $breakpoint-md) {
     padding: 0 75px;
   }
-  @include mq($until: $breakpoint-xxxl) {
-    grid-column: 7 / 12; /* 3 columns */
+  @include mq($until: $breakpoint-sm) {
+    padding: 0 32px;
   }
 }
 
@@ -277,8 +280,11 @@ body {
   @include mq($until: $breakpoint-lg) {
     padding-left: 32px;
   }
-  @include mq($until: $breakpoint-sm) {
-    padding-left: 0;
+
+  &--sm-0 {
+    @include mq($until: $breakpoint-sm) {
+      padding-left: 0;
+    }
   }
 }
 
